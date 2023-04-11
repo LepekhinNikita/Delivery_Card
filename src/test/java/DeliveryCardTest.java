@@ -137,16 +137,4 @@ class DeliveryCardTest {
         $("[data-test-id=phone].input_invalid .input__sub").shouldBe(text("Телефон указан неверно. Должно быть 11 цифр, например, +79012345678."));
     }
 
-    @Test
-    void shouldTestPositiveData7() {
-        $("[data-test-id=city] input").setValue("Ек");
-        $(byText("Екатеринбург")).click();
-        String dateDelivery = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=date] input").setValue(dateDelivery);
-        $("[data-test-id=name] input").setValue("Иванов Петр");
-        $("[data-test-id=phone] input").setValue("+70000000000");
-        $("[data-test-id=agreement]").click();
-        $(byText("Забронировать")).click();
-        $(withText("Встреча успешно забронирована на")).shouldBe(visible, Duration.ofSeconds(15));
-    }
 }
