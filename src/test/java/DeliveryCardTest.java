@@ -13,6 +13,9 @@ import static com.codeborne.selenide.Selectors.withText;
 import static com.codeborne.selenide.Selenide.*;
 
 class DeliveryCardTest {
+
+    String dateDelivery(int day) {
+        return LocalDate.now().plusDays(day).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));}
     @BeforeEach
     void setUP() {
         Configuration.holdBrowserOpen = true;
@@ -24,8 +27,7 @@ class DeliveryCardTest {
     @Test
     void shouldTestPositive() {
         $("[data-test-id=city] input").setValue("Саратов");
-        String dateDelivery = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=date] input").setValue(dateDelivery);
+        $("[data-test-id=date] input").setValue(dateDelivery(3));
         $("[data-test-id=name] input").setValue("Илон Маск");
         $("[data-test-id=phone] input").setValue("+71234567890");
         $("[data-test-id=agreement]").click();
@@ -36,8 +38,7 @@ class DeliveryCardTest {
     @Test
     void shouldTestEmptyCity() {
         $("[data-test-id=city] input").setValue("");
-        String dateDelivery = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=date] input").setValue(dateDelivery);
+        $("[data-test-id=date] input").setValue(dateDelivery(3));
         $("[data-test-id=name] input").setValue("Илон Маск");
         $("[data-test-id=phone] input").setValue("+71234567890");
         $("[data-test-id=agreement]").click();
@@ -58,8 +59,7 @@ class DeliveryCardTest {
     @Test
     void shouldTestEmptyName() {
         $("[data-test-id=city] input").setValue("Саратов");
-        String dateDelivery = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=date] input").setValue(dateDelivery);
+        $("[data-test-id=date] input").setValue(dateDelivery(3));
         //$("[data-test-id=name] input").setValue("Ivanov");
         $("[data-test-id=phone] input").setValue("+71234567890");
         $("[data-test-id=agreement]").click();
@@ -70,8 +70,7 @@ class DeliveryCardTest {
     @Test
     void shouldTestEmptyPhone() {
         $("[data-test-id=city] input").setValue("Саратов");
-        String dateDelivery = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=date] input").setValue(dateDelivery);
+        $("[data-test-id=date] input").setValue(dateDelivery(3));
         $("[data-test-id=name] input").setValue("Илон Маск");
         $("[data-test-id=agreement]").click();
         $(byText("Забронировать")).click();
@@ -81,8 +80,7 @@ class DeliveryCardTest {
     @Test
     void shouldTestNegativeEmptyCheckBox() {
         $("[data-test-id=city] input").setValue("Саратов");
-        String dateDelivery = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=date] input").setValue(dateDelivery);
+        $("[data-test-id=date] input").setValue(dateDelivery(3));
         $("[data-test-id=name] input").setValue("Илон Маск");
         $("[data-test-id=phone] input").setValue("+71234567890");
         $(byText("Забронировать")).click();
@@ -92,8 +90,7 @@ class DeliveryCardTest {
     @Test
     void shouldTestWrongCity() {
         $("[data-test-id=city] input").setValue("Энгельс");
-        String dateDelivery = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=date] input").setValue(dateDelivery);
+        $("[data-test-id=date] input").setValue(dateDelivery(3));
         $("[data-test-id=name] input").setValue("Илон Маск");
         $("[data-test-id=phone] input").setValue("+71234567890");
         $("[data-test-id=agreement]").click();
@@ -104,8 +101,7 @@ class DeliveryCardTest {
     @Test
     void shouldTestNegativeDate() {
         $("[data-test-id=city] input").setValue("Саратов");
-        String dateDelivery = LocalDate.now().plusDays(2).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=date] input").setValue(dateDelivery);
+        $("[data-test-id=date] input").setValue(dateDelivery(1));
         $("[data-test-id=name] input").setValue("Илон Маск");
         $("[data-test-id=phone] input").setValue("+71234567890");
         $("[data-test-id=agreement]").click();
@@ -116,8 +112,7 @@ class DeliveryCardTest {
     @Test
     void shouldTestNegativeName() {
         $("[data-test-id=city] input").setValue("Саратов");
-        String dateDelivery = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=date] input").setValue(dateDelivery);
+        $("[data-test-id=date] input").setValue(dateDelivery(3));
         $("[data-test-id=name] input").setValue("Ilon Mask");
         $("[data-test-id=phone] input").setValue("+71234567890");
         $("[data-test-id=agreement]").click();
@@ -128,8 +123,7 @@ class DeliveryCardTest {
     @Test
     void shouldTestNegativePhone() {
         $("[data-test-id=city] input").setValue("Саратов");
-        String dateDelivery = LocalDate.now().plusDays(3).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        $("[data-test-id=date] input").setValue(dateDelivery);
+        $("[data-test-id=date] input").setValue(dateDelivery(3));
         $("[data-test-id=name] input").setValue("Илон Маск");
         $("[data-test-id=phone] input").setValue("+712345678");
         $("[data-test-id=agreement]").click();
